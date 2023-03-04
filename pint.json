@@ -1,0 +1,20 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "binary_operator_spaces": {
+            "default": "single_space",
+            "operators": {
+                "=": "align",
+                "=>": "align"
+            }
+        },
+        "declare_strict_types": true,
+        "class_definition": true,
+        "final_class": true,
+        "new_with_braces": {
+            "anonymous_class": false,
+            "named_class": false
+        },
+        "psr_autoloading": true
+    }
+}
