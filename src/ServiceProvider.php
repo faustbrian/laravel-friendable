@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PreemStudio\Friendships;
 
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+use PreemStudio\Jetpack\Package\AbstractServiceProvider;
+use PreemStudio\Jetpack\Package\Package;
 
-final class ServiceProvider extends PackageServiceProvider
+final class ServiceProvider extends AbstractServiceProvider
 {
     public function configurePackage(Package $package): void
     {

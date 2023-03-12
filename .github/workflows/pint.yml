@@ -1,4 +1,4 @@
-name: Fix PHP code style issues
+name: Pint
 
 on:
   push:
@@ -10,15 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Clone
         uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Fix PHP code style issues
-        uses: aglipanci/laravel-pint-action@2.1.0
+      - name: Execute
+        run: composer format
 
-      - name: Commit changes
+      - name: Commit
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "chore: resolve style guide violations"
