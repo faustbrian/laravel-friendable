@@ -6,17 +6,22 @@ on:
       - '**.php'
 
 jobs:
-  php-code-styling:
+  run:
     runs-on: ubuntu-latest
-
     steps:
       - name: Clone
         uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: latest
+          coverage: none
+
       - name: Install
-        run: composer install
+        uses: ramsey/composer-install@v2
 
       - name: Execute
         run: composer format

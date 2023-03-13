@@ -7,8 +7,7 @@ on:
       - 'phpstan.neon.dist'
 
 jobs:
-  phpstan:
-    name: phpstan
+  run:
     runs-on: ubuntu-latest
     steps:
       - name: Clone
@@ -19,7 +18,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: latest
           coverage: none
 
       - name: Install
