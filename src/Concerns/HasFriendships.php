@@ -11,7 +11,7 @@ use Illuminate\Support\Collection;
 use PreemStudio\Friendable\Enums\Status;
 use PreemStudio\Friendable\Models\Friendship;
 
-trait HasFriendable
+trait HasFriendships
 {
     public function friends(): MorphMany
     {
