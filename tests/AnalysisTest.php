@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Analysis;
 
-use GrahamCampbell\Analyzer\AnalysisTrait;
-use Tests\TestCase;
+use PreemStudio\Jetpack\Tests\AbstractAnalysisTestCase;
 
-final class AnalysisTest extends TestCase
+final class AnalysisTest extends AbstractAnalysisTestCase
 {
-    use AnalysisTrait;
-
     public static function getPaths(): array
     {
         return [

@@ -1,11 +1,11 @@
 {
-    "name": "preemstudio/laravel-friendships",
-    "description": "This is my package laravel-friendships",
+    "name": "preemstudio/laravel-friendable",
+    "description": "This is my package laravel-friendable",
     "license": "MIT",
     "keywords": [
         "PreemStudio",
         "laravel",
-        "laravel-friendships"
+        "laravel-friendable"
     ],
     "authors": [
         {
@@ -14,7 +14,7 @@
             "role": "Developer"
         }
     ],
-    "homepage": "https://github.com/preemstudio/laravel-friendships",
+    "homepage": "https://github.com/preemstudio/laravel-friendable",
     "require": {
         "php": "^8.2",
         "illuminate/contracts": "^10.0",
@@ -38,7 +38,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "PreemStudio\\Friendships\\": "src"
+            "PreemStudio\\Friendable\\": "src"
         }
     },
     "autoload-dev": {
@@ -57,7 +57,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "PreemStudio\\Friendships\\ServiceProvider"
+                "PreemStudio\\Friendable\\ServiceProvider"
             ]
         }
     },

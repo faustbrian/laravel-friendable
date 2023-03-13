@@ -15,6 +15,9 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
+      - name: Install
+        run: composer install
+
       - name: Execute
         run: composer format
 

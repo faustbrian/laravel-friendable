@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PreemStudio\Friendships\Enums;
+namespace PreemStudio\Friendable\Enums;
 
 final class Status
 {

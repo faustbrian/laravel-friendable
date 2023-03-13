@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PreemStudio\Friendships\Concerns;
+namespace PreemStudio\Friendable\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
-use PreemStudio\Friendships\Enums\Status;
-use PreemStudio\Friendships\Models\Friendship;
+use PreemStudio\Friendable\Enums\Status;
+use PreemStudio\Friendable\Models\Friendship;
 
-trait HasFriendships
+trait HasFriendable
 {
     public function friends(): MorphMany
     {
@@ -102,29 +102,29 @@ trait HasFriendships
         return $this->findFriendship($recipient)->first();
     }
 
-    public function getAllFriendships(int $limit = null, int $offset = null): array
+    public function getAllFriendable(int $limit = null, int $offset = null): array
     {
-        return $this->findFriendshipsByStatus(null, $limit, $offset);
+        return $this->findFriendableByStatus(null, $limit, $offset);
     }
 
-    public function getPendingFriendships(int $limit = null, int $offset = 0): array
+    public function getPendingFriendable(int $limit = null, int $offset = 0): array
     {
-        return $this->findFriendshipsByStatus(Status::PENDING, $limit, $offset);
+        return $this->findFriendableByStatus(Status::PENDING, $limit, $offset);
     }
 
-    public function getAcceptedFriendships(int $limit = null, int $offset = 0): array
+    public function getAcceptedFriendable(int $limit = null, int $offset = 0): array
     {
-        return $this->findFriendshipsByStatus(Status::ACCEPTED, $limit, $offset);
+        return $this->findFriendableByStatus(Status::ACCEPTED, $limit, $offset);
     }
 
-    public function getDeniedFriendships(int $limit = null, int $offset = 0): array
+    public function getDeniedFriendable(int $limit = null, int $offset = 0): array
     {
-        return $this->findFriendshipsByStatus(Status::DENIED, $limit, $offset);
+        return $this->findFriendableByStatus(Status::DENIED, $limit, $offset);
     }
 
-    public function getBlockedFriendships(int $limit = null, int $offset = 0): array
+    public function getBlockedFriendable(int $limit = null, int $offset = 0): array
     {
-        return $this->findFriendshipsByStatus(Status::BLOCKED, $limit, $offset);
+        return $this->findFriendableByStatus(Status::BLOCKED, $limit, $offset);
     }
 
     public function hasBlocked(Model $recipient): bool
@@ -171,7 +171,7 @@ trait HasFriendships
         });
     }
 
-    private function findFriendshipsByStatus($status, $limit, $offset): array
+    private function findFriendableByStatus($status, $limit, $offset): array
     {
         $friendships = [];
 
