@@ -1,0 +1,74 @@
+name: "Continuous Integration"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  phpstan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Prepare
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: latest
+          coverage: none
+
+      - name: Install
+        uses: ramsey/composer-install@v2
+
+      - name: Execute
+        run: ./vendor/bin/phpstan --error-format=github
+  pint:
+    needs: phpstan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Prepare
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: latest
+          coverage: none
+
+      - name: Install
+        uses: ramsey/composer-install@v2
+
+      - name: Execute
+        run: composer format
+
+      - name: Commit
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore: resolve style guide violations"
+  pest:
+    needs: pint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Prepare
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: latest
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: none
+
+      - name: Install
+        uses: ramsey/composer-install@v2
+
+      - name: Execute
+        run: composer test
