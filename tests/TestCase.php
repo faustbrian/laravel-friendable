@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use Orchestra\Testbench\TestCase as Orchestra;
-use PreemStudio\Friendable\ServiceProvider;
+use PreemStudio\Jetpack\TestBench\AbstractPackageTestCase;
 
-abstract class TestCase extends Orchestra
+abstract class TestCase extends AbstractPackageTestCase
 {
-    protected function getPackageProviders($app)
+    protected function getServiceProviderClass(): string
     {
-        return [
-            ServiceProvider::class,
-        ];
+        return \PreemStudio\Friendable\ServiceProvider::class;
     }
 }
