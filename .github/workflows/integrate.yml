@@ -1,4 +1,4 @@
-name: "Continuous Integration"
+name: "Integrate"
 
 on:
   push:
@@ -7,27 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  phpstan:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Clone
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
-
-      - name: Prepare
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: latest
-          coverage: none
-
-      - name: Install
-        uses: ramsey/composer-install@v2
-
-      - name: Execute
-        run: ./vendor/bin/phpstan --error-format=github
-  pint:
-    needs: phpstan
+  coding-standards:
     runs-on: ubuntu-latest
     steps:
       - name: Clone
@@ -51,8 +31,48 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "chore: resolve style guide violations"
-  pest:
-    needs: pint
+  security-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Prepare
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: latest
+          coverage: none
+
+      - name: Install
+        uses: ramsey/composer-install@v2
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --ansi --strict
+
+      - name: Check installed packages for security vulnerability advisories
+        run: composer audit --ansi
+  static-code-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Prepare
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: latest
+          coverage: none
+
+      - name: Install
+        uses: ramsey/composer-install@v2
+
+      - name: Execute
+        run: ./vendor/bin/phpstan --error-format=github
+  tests:
     runs-on: ubuntu-latest
     steps:
       - name: Clone

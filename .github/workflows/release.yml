@@ -1,13 +1,12 @@
-name: "Continuous Changelog"
+name: "Release"
 
 on:
   release:
     types: [released]
 
 jobs:
-  generate:
+  generate-changelog:
     runs-on: ubuntu-latest
-
     steps:
       - name: Clone
         uses: actions/checkout@v3

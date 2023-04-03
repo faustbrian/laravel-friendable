@@ -3,7 +3,7 @@
     "description": "This is my package laravel-friendable",
     "license": "MIT",
     "keywords": [
-        "PreemStudio",
+        "Preem Studio",
         "laravel",
         "laravel-friendable"
     ],
@@ -14,7 +14,7 @@
             "role": "Developer"
         }
     ],
-    "homepage": "https://github.com/preemstudio/laravel-friendable",
+    "homepage": "https://github.com/PreemStudio/laravel-friendable",
     "require": {
         "php": "^8.2",
         "illuminate/contracts": "^10.0",
@@ -22,7 +22,6 @@
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.30",
-        "laravel/pint": "^1.6",
         "mockery/mockery": "^1.5",
         "nunomaduro/collision": "^6.4",
         "nunomaduro/larastan": "^2.5",
@@ -32,6 +31,7 @@
         "phpstan/extension-installer": "^1.2",
         "phpstan/phpstan-deprecation-rules": "^1.1",
         "phpstan/phpstan-phpunit": "^1.3",
+        "preemstudio/php-cs-fixer-config": "^1.3",
         "spatie/laravel-ray": "^1.32"
     },
     "minimum-stability": "dev",
@@ -64,7 +64,7 @@
     "scripts": {
         "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
         "analyse": "vendor/bin/phpstan analyse",
-        "format": "vendor/bin/pint --config vendor/preemstudio/laravel-jetpack/pint.json",
+        "format": "vendor/bin/php-cs-fixer fix",
         "test": "vendor/bin/pest",
         "test-coverage": "vendor/bin/pest --coverage"
     }
