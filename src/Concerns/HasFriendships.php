@@ -24,10 +24,10 @@ trait HasFriendships
             return true;
         }
 
-        $friendship = (new Friendship)->forceFill([
-            'recipient_id'   => $recipient->id,
-            'recipient_type' => get_class($recipient),
-            'status'         => Status::PENDING,
+        $friendship = (new Friendship())->forceFill([
+            'recipient_id' => $recipient->id,
+            'recipient_type' => $recipient::class,
+            'status' => Status::PENDING,
         ]);
 
         return (bool) $this->friends()->save($friendship);
@@ -35,7 +35,7 @@ trait HasFriendships
 
     public function unfriend(Model $recipient): bool
     {
-        if (! $this->isFriendsWith($recipient)) {
+        if (!$this->isFriendsWith($recipient)) {
             return false;
         }
 
@@ -46,7 +46,7 @@ trait HasFriendships
     {
         $exists = $this->findFriendship($recipient);
 
-        if (! empty($status)) {
+        if (!empty($status)) {
             $exists = $exists->where('status', $status);
         }
 
@@ -55,7 +55,7 @@ trait HasFriendships
 
     public function acceptFriendRequest(Model $recipient): bool
     {
-        if (! $this->isFriendsWith($recipient)) {
+        if (!$this->isFriendsWith($recipient)) {
             return false;
         }
 
@@ -66,7 +66,7 @@ trait HasFriendships
 
     public function denyFriendRequest(Model $recipient): bool
     {
-        if (! $this->isFriendsWith($recipient)) {
+        if (!$this->isFriendsWith($recipient)) {
             return false;
         }
 
@@ -77,7 +77,7 @@ trait HasFriendships
 
     public function blockFriendRequest(Model $recipient): bool
     {
-        if (! $this->isFriendsWith($recipient)) {
+        if (!$this->isFriendsWith($recipient)) {
             return false;
         }
 
@@ -88,7 +88,7 @@ trait HasFriendships
 
     public function unblockFriendRequest(Model $recipient): bool
     {
-        if (! $this->isFriendsWith($recipient)) {
+        if (!$this->isFriendsWith($recipient)) {
             return false;
         }
 
@@ -102,27 +102,27 @@ trait HasFriendships
         return $this->findFriendship($recipient)->first();
     }
 
-    public function getAllFriendable(int $limit = null, int $offset = null): array
+    public function getAllFriendable(?int $limit = null, ?int $offset = null): array
     {
         return $this->findFriendableByStatus(null, $limit, $offset);
     }
 
-    public function getPendingFriendable(int $limit = null, int $offset = 0): array
+    public function getPendingFriendable(?int $limit = null, int $offset = 0): array
     {
         return $this->findFriendableByStatus(Status::PENDING, $limit, $offset);
     }
 
-    public function getAcceptedFriendable(int $limit = null, int $offset = 0): array
+    public function getAcceptedFriendable(?int $limit = null, int $offset = 0): array
     {
         return $this->findFriendableByStatus(Status::ACCEPTED, $limit, $offset);
     }
 
-    public function getDeniedFriendable(int $limit = null, int $offset = 0): array
+    public function getDeniedFriendable(?int $limit = null, int $offset = 0): array
     {
         return $this->findFriendableByStatus(Status::DENIED, $limit, $offset);
     }
 
-    public function getBlockedFriendable(int $limit = null, int $offset = 0): array
+    public function getBlockedFriendable(?int $limit = null, int $offset = 0): array
     {
         return $this->findFriendableByStatus(Status::BLOCKED, $limit, $offset);
     }
@@ -134,12 +134,12 @@ trait HasFriendships
 
     public function isBlockedBy(Model $recipient): bool
     {
-        $friendship = Friendship::where(function ($query) use ($recipient) {
+        $friendship = Friendship::where(function ($query) use ($recipient): void {
             $query->where('sender_id', $this->id);
-            $query->where('sender_type', get_class($this));
+            $query->where('sender_type', \get_class($this));
 
             $query->where('recipient_id', $recipient->id);
-            $query->where('recipient_type', get_class($recipient));
+            $query->where('recipient_type', $recipient::class);
         })->first();
 
         return $friendship ? ($friendship->status === Status::BLOCKED) : false;
@@ -147,27 +147,27 @@ trait HasFriendships
 
     public function getFriendRequests(): Collection
     {
-        return Friendship::where(function ($query) {
+        return Friendship::where(function ($query): void {
             $query->where('recipient_id', $this->id);
-            $query->where('recipient_type', get_class($this));
+            $query->where('recipient_type', \get_class($this));
             $query->where('status', Status::PENDING);
         })->get();
     }
 
     private function findFriendship(Model $recipient): Builder
     {
-        return Friendship::where(function ($query) use ($recipient) {
+        return Friendship::where(function ($query) use ($recipient): void {
             $query->where('sender_id', $this->id);
-            $query->where('sender_type', get_class($this));
+            $query->where('sender_type', \get_class($this));
 
             $query->where('recipient_id', $recipient->id);
-            $query->where('recipient_type', get_class($recipient));
-        })->orWhere(function ($query) use ($recipient) {
+            $query->where('recipient_type', $recipient::class);
+        })->orWhere(function ($query) use ($recipient): void {
             $query->where('sender_id', $recipient->id);
-            $query->where('sender_type', get_class($recipient));
+            $query->where('sender_type', $recipient::class);
 
             $query->where('recipient_id', $this->id);
-            $query->where('recipient_type', get_class($this));
+            $query->where('recipient_type', \get_class($this));
         });
     }
 
@@ -175,33 +175,33 @@ trait HasFriendships
     {
         $friendships = [];
 
-        $query = Friendship::where(function ($query) use ($status) {
+        $query = Friendship::where(function ($query) use ($status): void {
             $query->where('sender_id', $this->id);
-            $query->where('sender_type', get_class($this));
+            $query->where('sender_type', \get_class($this));
 
-            if (! empty($status)) {
+            if (!empty($status)) {
                 $query->where('status', $status);
             }
-        })->orWhere(function ($query) use ($status) {
+        })->orWhere(function ($query) use ($status): void {
             $query->where('recipient_id', $this->id);
-            $query->where('recipient_type', get_class($this));
+            $query->where('recipient_type', \get_class($this));
 
-            if (! empty($status)) {
+            if (!empty($status)) {
                 $query->where('status', $status);
             }
         });
 
-        if (! empty($limit)) {
+        if (!empty($limit)) {
             $query->take($limit);
         }
 
-        if (! empty($offset)) {
+        if (!empty($offset)) {
             $query->skip($offset);
         }
 
         foreach ($query->get() as $friendship) {
             $friendships[] = $this->getFriendship($this->find(
-                ($friendship->sender_id == $this->id) ? $friendship->recipient_id : $friendship->sender_id
+                ($friendship->sender_id === $this->id) ? $friendship->recipient_id : $friendship->sender_id,
             ));
         }
 
