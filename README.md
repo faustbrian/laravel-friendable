@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://preem.studio" target="_blank">
-        <img src="https://raw.githubusercontent.com/PreemStudio/assets/main/logo-text.svg" width="400" alt="Preem Studio Logo" />
+        <img src="https://raw.githubusercontent.com/PreemStudio/assets/main/logo-text.svg" width="128" alt="Preem Studio Logo" />
     </a>
 </p>
 
