@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace BombenProdukt\Friendable\Concerns;
 
+use BombenProdukt\Friendable\Enums\Status;
+use BombenProdukt\Friendable\Models\Friendship;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
-use BombenProdukt\Friendable\Enums\Status;
-use BombenProdukt\Friendable\Models\Friendship;
 
 trait HasFriendships
 {
