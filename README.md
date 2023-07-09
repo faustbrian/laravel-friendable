@@ -4,20 +4,6 @@
     </a>
 </p>
 
-<p align="center">
-    <a href="https://github.com/faustbrian/laravel-friendable/actions">
-        <img src="https://badge.sh/github/check-runs/BombenProdukt/laravel-friendable" alt="Checks" />
-    </a>
-    <a href="https://packagist.org/packages/bombenprodukt/laravel-friendable">
-        <img src="https://badge.sh/packagist/downloads/BombenProdukt/laravel-friendable" alt="Downloads" />
-    </a>
-    <a href="https://packagist.org/packages/bombenprodukt/laravel-friendable">
-        <img src="https://badge.sh/packagist/version/BombenProdukt/laravel-friendable" alt="Version" />
-    </a>
-    <a href="https://packagist.org/packages/bombenprodukt/laravel-friendable">
-        <img src="https://badge.sh/packagist/license/BombenProdukt/laravel-friendable" alt="License" />
-    </a>
-</p>
 
 ## About Laravel Friendable
 
