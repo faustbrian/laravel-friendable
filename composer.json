@@ -21,6 +21,7 @@
         "bombenprodukt/laravel-package-powerpack": "^1.0"
     },
     "require-dev": {
+        "bombenprodukt/php-cs-fixer-config": "^1.0",
         "ergebnis/composer-normalize": "^2.30",
         "friendsofphp/php-cs-fixer": "^3.16",
         "mockery/mockery": "^1.5",
@@ -33,7 +34,7 @@
         "phpstan/extension-installer": "^1.2",
         "phpstan/phpstan-deprecation-rules": "^1.1",
         "phpstan/phpstan-phpunit": "^1.3",
-        "bombenprodukt/php-cs-fixer-config": "^1.0",
+        "phpstan/phpstan-strict-rules": "^1.5",
         "spatie/laravel-ray": "^1.32"
     },
     "minimum-stability": "dev",
