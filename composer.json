@@ -1,0 +1,74 @@
+{
+    "name": "basecodeoy/laravel-friendable",
+    "description": "This is my package laravel-friendable",
+    "license": "MIT",
+    "keywords": [
+        "BaseCode Oy",
+        "laravel",
+        "laravel-friendable"
+    ],
+    "authors": [
+        {
+            "name": "Brian Faust",
+            "email": "hello@basecode.sh",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/basecodeoy/laravel-friendable",
+    "require": {
+        "php": "^8.2",
+        "illuminate/contracts": "^10.0",
+        "basecodeoy/laravel-package-powerpack": "^0.0.1"
+    },
+    "require-dev": {
+        "basecodeoy/php-cs-fixer-config": "^0.0.1",
+        "ergebnis/composer-normalize": "^2.30",
+        "friendsofphp/php-cs-fixer": "^3.16",
+        "mockery/mockery": "^1.5",
+        "nunomaduro/collision": "^7.0",
+        "nunomaduro/larastan": "^2.5",
+        "orchestra/testbench": "^8.0",
+        "pestphp/pest": "^2.0",
+        "pestphp/pest-plugin-laravel": "^2.0",
+        "pestphp/pest-plugin-watch": "^2.0",
+        "phpstan/extension-installer": "^1.2",
+        "phpstan/phpstan-deprecation-rules": "^1.1",
+        "phpstan/phpstan-phpunit": "^1.3",
+        "phpstan/phpstan-strict-rules": "^1.5",
+        "spatie/laravel-ray": "^1.32"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "BaseCodeOy\\Friendable\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true,
+            "ergebnis/composer-normalize": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "BaseCodeOy\\Friendable\\ServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "analyse": "vendor/bin/phpstan analyse",
+        "format": "vendor/bin/php-cs-fixer fix",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage"
+    }
+}
