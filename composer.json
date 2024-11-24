@@ -1,0 +1,60 @@
+{
+    "name": "basecodeoy/laravel-friendable",
+    "description": "This is my package laravel-friendable",
+    "license": "MIT",
+    "keywords": [
+        "BaseCode Oy",
+        "laravel",
+        "laravel-friendable"
+    ],
+    "authors": [
+        {
+            "name": "Brian Faust",
+            "email": "hello@basecode.sh",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/basecodeoy/laravel-friendable",
+    "require": {
+        "php": "^8.3",
+        "basecodeoy/laravel-package-powerpack": "^1.0.0",
+        "illuminate/contracts": "^11.0"
+    },
+    "require-dev": {
+        "basecodeoy/standards": "^1.0.5"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "BaseCodeOy\\Friendable\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "BaseCodeOy\\Friendable\\ServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "analyse": "vendor/bin/phpstan analyse",
+        "format": "vendor/bin/php-cs-fixer fix",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage"
+    }
+}
